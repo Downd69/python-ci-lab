@@ -13,13 +13,22 @@ def is_palindrome(text: str) -> bool:
     """
     
     queue = []
-    halfway = len(text) // 2
+    n = len(text)
+    halfway = n // 2
 
+    # push left half
     for c in text[:halfway]:
         queue.append(c)
-    
-    for c in text[halfway + 1:]:
+
+    # for odd lengths, skip the middle character
+    if n % 2 == 0:
+        right_half = text[halfway:]
+    else:
+        right_half = text[halfway + 1:]
+
+    # compare right half with stack
+    for c in right_half:
         if c != queue.pop():
             return False
-        
+
     return True
